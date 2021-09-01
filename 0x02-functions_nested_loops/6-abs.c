@@ -1,20 +1,21 @@
-/*
- * File: 6-abs.c
- * Auth: Nazrawi Medhin
- */
-
 #include "holberton.h"
 
 /**
- * _abs - Computes the absolute value of an integer.
- * @n: The integer to be computed.
+ * _abs - Computes the absolute value
+ * of an integer.
  *
- * Return: The absolute value of the integer.
+ * @i: input number as an integer.
+ *
+ * Return: absolute value
  */
-int _abs(int n)
+int _abs(int i)
 {
-	if (n >= 0)
-		return (n);
+	if (i >= 0)
+	{
+		return (i);
+	}
 	else
-		return (-n);
+	{
+		return (i * -1);
+	}
 }
