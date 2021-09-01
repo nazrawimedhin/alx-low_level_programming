@@ -1,21 +1,22 @@
-/*
- * File: 4-isalpha.c
- * Auth: Nazrawi Medhin
- */
-
 #include "holberton.h"
 
 /**
- * _isalpha - Checks if a character is alphabetic.
- * @c: The character to be checked.
+ * _isalpha - Shows 1 if the input is a
+ * letter Another cases, shows 0
  *
- * Return: 1 if character is letter, lowercase or uppercase, 0 otherwise.
+ * @c: The character in ASCII code
+ *
+ * Return: 1 for letters. 0 for the rest.
  */
 int _isalpha(int c)
 {
-	if ((c >= 'a' && c <= 'z') ||
-	    (c >= 'A' && c <= 'Z'))
+	if ((c >= 97 && c <= 122) || (c >= 65 && c <= 90))
+	{
 		return (1);
+	}
 	else
+	{
 		return (0);
+	}
+	_putchar('\n');
 }
