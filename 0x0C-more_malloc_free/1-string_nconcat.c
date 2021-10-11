@@ -1,54 +1,52 @@
 #include "main.h"
-#include <stdio.h>
-#include <stdlib.h>
-/**
- * _strlen - returns the length of the string
- * @s: input string to count
- * Description: returns the length of a given string
- * Return: length of string as int
- **/
-int _strlen(char *s)
-{
-	unsigned int i;
 
-	if (s == NULL)
-		return (1);
-	for (i = 0; s[i] != '\0'; i++)
-		;
-	return (i + 1);
-}
 /**
- * string_nconcat - concatenate n chars of second string to first
- * @s1: first string
- * @s2: second string
- * @n: number of chars to concatenate
- * Description: concatenate two strings, return NULL if fails
- * Return: pointer to string, NULL if fails
- **/
+ * string_nconcat - concatenates s1 to the first n bytes of s2
+ *					if n is greater than the size of s2, all of s2 is
+ *					concatenated to s1
+ * @s1: the first string, @s2 will be concatenated to the end of this string
+ * @s2: the first n bytes of this string will be concatenated to @s1
+ * @n: number of bytes to be copied form @s2
+ *
+ * Return: concatenated string, @s1 and @s2 concatenated
+*/
+
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-	char *dest;
-	unsigned int size1, size2, i, j;
+	unsigned int s1_size = 0, s2_size = 0, i;
+	char *concatenated_string;
 
-	size1 = _strlen(s1);
-	size2 = _strlen(s2);
-	if (n > size2 - 1)
-		n = size2 - 1;
+	if (s1 == NULL)
+		s1 = "";
 
-	dest = (char *)malloc((size1 + n) * sizeof(char));
-	if (dest == NULL)
+	if (s2 == NULL)
+		s2 = "";
+
+	while (s1[s1_size] != 0)
+		s1_size++;
+
+	while (s2[s2_size] != 0)
+		s2_size++;
+
+	if (n >= s2_size)
+		n = s2_size;
+
+	concatenated_string = (char *) malloc(s1_size + n + 1);
+
+	if (!concatenated_string)
 		return (NULL);
-	if (size1 == 1 && size2 == 1)
-		return (NULL);
 
-	for (i = 0; i < size1 - 1; i++)
-		dest[i] = s1[i];
-
-	for (j = 0; j <= n; j++)
+	for (i = 0; i < s1_size + n; i++)
 	{
-		dest[i + j] = s2[j];
-	}
-	dest[i + j] = '\0';
+		if (i >= s1_size)
+		{
+			concatenated_string[i] = s2[i - s1_size];
+			continue;
+		}
 
-	return (dest);
+		concatenated_string[i] = s1[i];
+	}
+
+	concatenated_string[s1_size + n] = '\0';
+	return (concatenated_string);
 }
