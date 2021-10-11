@@ -1,20 +1,19 @@
 #include "main.h"
+#include <stdlib.h>
 
 /**
- * string_nconcat - concatenates s1 to the first n bytes of s2
- *					if n is greater than the size of s2, all of s2 is
- *					concatenated to s1
- * @s1: the first string, @s2 will be concatenated to the end of this string
- * @s2: the first n bytes of this string will be concatenated to @s1
- * @n: number of bytes to be copied form @s2
+ * string_nconcat - concatenates two strings.
+ * @s1: first string.
+ * @s2: second string.
+ * @n: amount of bytes.
  *
- * Return: concatenated string, @s1 and @s2 concatenated
-*/
-
+ * Return: pointer to the allocated memory.
+ * if malloc fails, status value is equal to 98.
+ */
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-	unsigned int s1_size = 0, s2_size = 0, i;
-	char *concatenated_string;
+	char *sout;
+	unsigned int ls1, ls2, lsout, i;
 
 	if (s1 == NULL)
 		s1 = "";
@@ -22,31 +21,29 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	if (s2 == NULL)
 		s2 = "";
 
-	while (s1[s1_size] != 0)
-		s1_size++;
+	for (ls1 = 0; s1[ls1] != '\0'; ls1++)
+		;
 
-	while (s2[s2_size] != 0)
-		s2_size++;
+	for (ls2 = 0; s2[ls2] != '\0'; ls2++)
+		;
 
-	if (n >= s2_size)
-		n = s2_size;
+	if (n > ls2)
+		n = ls2;
 
-	concatenated_string = (char *) malloc(s1_size + n + 1);
+	lsout = ls1 + n;
 
-	if (!concatenated_string)
+	sout = malloc(lsout + 1);
+
+	if (sout == NULL)
 		return (NULL);
 
-	for (i = 0; i < s1_size + n; i++)
-	{
-		if (i >= s1_size)
-		{
-			concatenated_string[i] = s2[i - s1_size];
-			continue;
-		}
+	for (i = 0; i < lsout; i++)
+		if (i < ls1)
+			sout[i] = s1[i];
+		else
+			sout[i] = s2[i - ls1];
 
-		concatenated_string[i] = s1[i];
-	}
+	sout[i] = '\0';
 
-	concatenated_string[s1_size + n] = '\0';
-	return (concatenated_string);
+	return (sout);
 }
