@@ -30,12 +30,12 @@ list_t *add_node(list_t **head, const char *str)
 	if (temp == NULL)
 		return (NULL);
 	/* temp now points to first element*/
-	temp->next = *head;
+	temp->next = head;
 	temp->str = strdup(str);
 	temp->len = _strlen(str);
 
-	*head = temp;
+	head = temp;
 
-	return (*head);
+	return (head);
 
 }
