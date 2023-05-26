@@ -1,6 +1,6 @@
 # alx-Low_level_programming
 
-Module of **Low level programming**, carried out during **Full Stack Software Engineering studies** at **[ALX School](https://www.alxafrica.com)**.
+Module of **alx-low_level_programming**, carried out during **Full Stack Software Engineering studies** at **[ALX School](https://www.alxafrica.com)**.
 
 ## Technologies
 
